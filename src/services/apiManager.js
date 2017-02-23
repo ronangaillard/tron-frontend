@@ -29,6 +29,7 @@ class ApiManager {
     ready = false;
     loggedIn = false;
     userId= -1;
+    userName = "";
     toNotify = null;
     toNotifyForUserId = null;
 
@@ -45,6 +46,7 @@ class ApiManager {
             console.log("Notifying");
             this.toNotify.setState({loggedIn: loggedIn});
             this.toNotify.setState({ready: true});
+            this.toNotify.setState({username: this.userName});
         }
         else
             console.log("Not notifying")
@@ -66,6 +68,7 @@ class ApiManager {
                         reject(response.info);
                     else{
                         this.userId = json.id;
+                        this.userName = json.name;
                         this.loggedIn = true;
                         this.notifyUserdId();
                         resolve(json.id);
@@ -142,6 +145,7 @@ class ApiManager {
     }
 
     login(username, password) {
+        this.userName = username;
         return new Promise((resolve, reject) => {
             const formData = new FormData()
             formData.append('name', username);
