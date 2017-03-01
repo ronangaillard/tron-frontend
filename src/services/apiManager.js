@@ -39,6 +39,8 @@ class ApiManager {
 
     askIdNotification(component) {
         this.toNotifyForUserId = component;
+        if(this.userId != -1)
+            this.notifyUserdId();
     }
 
     notify(loggedIn) {
@@ -54,6 +56,7 @@ class ApiManager {
 
     notifyUserdId() {
         if(this.toNotifyForUserId) {
+            console.log("!notifyUserdId");
             this.toNotifyForUserId.setState({currentUserId: this.userId});
         }
     }

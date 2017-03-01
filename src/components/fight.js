@@ -6,15 +6,23 @@ import { browserHistory } from 'react-router';
 
 class FightPage extends Component {
     constructor() {
+
+        console.log("constructor");
         super();
         this.apiManager = new ApiManager();
         this.state = {
             players: [],
             currentUserId: -1,
         };
-        this.apiManager.askIdNotification(this);
+        //this.apiManager.askIdNotification(this);
         this.apiManager.getPlayerList().then((players) => {
             this.setState({ players: players });
+        });
+        this.apiManager.getUserId().then((value) => {
+            console.log("Receiving user id)");
+            this.setState({currentUserId: value});
+        }, (error) => {
+            console.log("Error while receiving user id");
         });
     }
 
