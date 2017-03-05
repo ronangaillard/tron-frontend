@@ -14,7 +14,7 @@ class FightPage extends Component {
             players: [],
             currentUserId: -1,
         };
-        //this.apiManager.askIdNotification(this);
+        
         this.apiManager.getPlayerList().then((players) => {
             this.setState({ players: players });
         });

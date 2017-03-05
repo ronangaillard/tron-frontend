@@ -2,7 +2,7 @@ let apiManagerInstance = null;
 
 class ApiManager {
     instance = null;
-    serverUrl = 'http://tronbackend.ronangaillard.fr/api/'
+    serverUrl = 'http://localhost:5000/api/'
 
     constructor(toBeNotified ) {
         if (!apiManagerInstance) {
@@ -132,6 +132,7 @@ class ApiManager {
         return new Promise((resolve, reject) => {
             const formData = new FormData()
             formData.append('enemyId', enemyId);
+            
 
             fetch(this.serverUrl + 'fight/launch', {
                 credentials: 'include',
@@ -140,7 +141,7 @@ class ApiManager {
             })
                 .then((response) => response.json().then((json) => {
                     if (json.response === 'fail')
-                        reject(json.response.info);
+                        reject(json);
                     else
                         resolve(json.fightResult);
                 }));

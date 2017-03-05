@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch, Link, browserHistory } from 'react-router'
+import {Row, Col, Pager} from 'react-bootstrap';
 
 import './App.css';
 import CustomNavBar from './components/customNavBar.js'
@@ -15,7 +16,13 @@ class App extends Component {
     return (
      <div style={this.generalStyle}>
         <CustomNavBar />
-        {this.props.children}
+        {this.props.children  || 
+          <Pager>
+            <h1>Tron IA Game</h1>
+            <h3>Sign up, code and challenge other players !</h3>
+            <br/>
+            <img style={this.spinnerStyle} src="images/tron-moto.png" />
+          </Pager>}
       </div>
     );
   }
