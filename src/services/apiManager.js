@@ -2,7 +2,7 @@ let apiManagerInstance = null;
 
 class ApiManager {
     instance = null;
-    serverUrl = 'http://localhost:5000/api/'
+    serverUrl = 'http://tronbackend.ronangaillard.fr/api/'
 
     constructor(toBeNotified ) {
         if (!apiManagerInstance) {
