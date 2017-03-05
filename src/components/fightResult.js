@@ -76,7 +76,7 @@ class FightResultPage extends Component {
         if(window.SendMessage) {
 
             let result = window.SendMessage("Main", "init", this.state.fightMoves);
-            console.log('Setting variables');
+            console.log('Setting variables', this.state.fightMoves);
             clearInterval(this.state.intervalId);
         }
         else
