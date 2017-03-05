@@ -9,6 +9,18 @@ import {
     ModalBody,
     ModalFooter
 } from 'react-modal-bootstrap';
+var htmlContent = `
+
+<div class="template">
+  <div class="template-wrap clear">
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="600px" width="960px"></canvas>
+    <br>
+    <div class="logo"></div>
+    <div class="fullscreen"><img src="/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);"
+      /></div>
+    <div class="title">Tron</div>
+  </div>
+</div>`;
 
 class FightResultPage extends Component {
     constructor(props) {
@@ -20,9 +32,11 @@ class FightResultPage extends Component {
 
         this.showHelp = this.showHelp.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.setUnityVariables = this.setUnityVariables.bind(this);
 
         this.apiManager.launchFight(this, this.props.params.id).then((result) => {
             this.setState({fightMoves: JSON.stringify(result)});
+            this.setState({winner : this.state.fightMoves.winner});
             console.log("result of fight ");
             console.dir(result);
         }, (error) => {
@@ -40,6 +54,43 @@ class FightResultPage extends Component {
 
     closeModal() {
         this.setState({ modalVisible: false });
+    }
+
+    componentDidMount () {
+        /*fetch('/Release/UnityLoader.js').then((result) => {
+            console.log(result);
+            window.eval(result);
+        });*/
+
+        const script = document.createElement("script");
+
+        script.src = "/Release/UnityLoader.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        
+        var intervalId = setInterval(this.setUnityVariables, 1000);
+        this.setState({intervalId: intervalId});
+    }
+
+
+    setUnityVariables(){
+        if(window.SendMessage) {
+
+            let result = window.SendMessage("Main", "init", this.state.fightMoves);
+            console.log('Setting variables');
+            clearInterval(this.state.intervalId);
+        }
+        else
+            console.log('Waiting... for unity');
+   
+
+    }
+
+    componentWillUnmount() {
+        // use intervalId from the state to clear the interval
+        clearInterval(this.state.intervalId);
     }
 
     render() {
@@ -62,9 +113,10 @@ class FightResultPage extends Component {
   
   
                     <h1> Fight Results</h1>
-                    <p>Moves as JSON : </p>
+                    <h3>{this.state.winner == 1 ? 'You are the winner !' : 'You lost... :('}</h3>
                     <p>{!this.state.fightMoves && 'Loading...'}</p>
-                    <p>{this.state.fightMoves}</p>
+                    
+                    <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
                     
                 
             </Pager>

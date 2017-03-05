@@ -131,7 +131,7 @@ class IDEPage extends Component {
                     <ModalBody>
                         <p>You have to code your IA using LUA.</p>
 
-                        <p>You code has to be in a function like this : <i>function move(walls, pos_x, pos_y, direction)</i></p>
+                        <p>You code has the following variable declared </p>
 
                         <p><strong>walls</strong> : is an array containing all the walls in the grid</p>
                         <p><strong>pos_x</strong> : position of your motorcycle along the x axis (West-East axis)</p>
@@ -140,7 +140,7 @@ class IDEPage extends Component {
 
                         <p>The Grid is 21x21</p>
 
-                        <p>Your move function has to return the next direction of your motorcycle ('N' for North, 'S' for South, 'W' for West and 'E' for East) and will be run at each turn.</p>
+                        <p>Your script has to return the next direction of your motorcycle ('N' for North, 'S' for South, 'W' for West and 'E' for East) and will be run at each turn.</p>
                     </ModalBody>
                    
                 </Modal>
