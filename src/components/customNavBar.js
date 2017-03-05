@@ -3,6 +3,7 @@ import { Navbar, Nav, NavItem, Button, FormGroup, FormControl, CollapsibleNav } 
 import ApiManager from '../services/apiManager.js'
 import { Link } from 'react-router';
 import Notifications, {notify} from 'react-notify-toast'; 
+import { browserHistory } from 'react-router';
 
 class CustomNavBar extends Component {
     constructor() {
@@ -64,6 +65,8 @@ class CustomNavBar extends Component {
         });
         this.setState({ loggingIn: false });
         this.setState({ loggedIn: false });
+
+        browserHistory.push('/');
     }
 
     render() {

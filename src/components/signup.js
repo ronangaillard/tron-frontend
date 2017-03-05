@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Row, Col, Pager, FormGroup, FieldGroup, Checkbox, Radio, ControlLabel, HelpBlock, FormControl, Button } from 'react-bootstrap';
-import ApiManager from '../services/apiManager.js'
-
+import ApiManager from '../services/apiManager.js';
+import { browserHistory } from 'react-router';
 class SignUpPage extends Component {
     constructor() {
         super();
@@ -32,6 +32,8 @@ class SignUpPage extends Component {
     }
 
     closeError() {
+        if(this.state.modalTitle === 'Signed up !')
+             browserHistory.push('/');
         this.setState({ showModal: false });
         this.setState({ signingUp: false });
     }
@@ -48,6 +50,7 @@ class SignUpPage extends Component {
                 console.log("Signed up");
                 this.setState({ modalTitle: 'Signed up !' });
                 this.showError('You can now log in !');
+               
             }).catch((value) => {
                 this.showError(value);
                 console.dir(value);

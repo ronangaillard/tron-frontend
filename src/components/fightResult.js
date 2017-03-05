@@ -9,6 +9,8 @@ import {
     ModalBody,
     ModalFooter
 } from 'react-modal-bootstrap';
+import { browserHistory } from 'react-router';
+
 var htmlContent = `
 
 <div class="template">
