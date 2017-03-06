@@ -75,8 +75,8 @@ class FightResultPage extends Component {
     setUnityVariables(){
         if(window.SendMessage) {
 
-            let result = window.SendMessage("Main", "init", this.state.fightMoves);
-            console.log('Setting variables', this.state.fightMoves);
+            let result = window.SendMessage("Main", "init", JSON.stringify(this.state.fightMoves));
+            console.log('Setting variables', JSON.stringify(this.state.fightMoves));
             clearInterval(this.state.intervalId);
         }
         else
