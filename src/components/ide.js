@@ -177,7 +177,7 @@ class IDEPage extends Component {
                             name="UNIQUE_ID_OF_DIV"
                             editorProps={{ $blockScrolling: true }}
                             value={this.state.ideCode}
-                            readOnly={this.state.loadingCode}
+                            readOnly={false}
                         />
                     </Col>
                 </Row>
